@@ -1,0 +1,15 @@
+
+
+
+.done-true {
+  text-decoration: line-through;
+  color: black;
+}
+
+.priority-high {
+	background: #f09!important;
+}
+
+.priority-medium {
+	background: #fc0!important;
+}

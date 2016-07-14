@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+* Author: Edmond Connolly
+* Assignment: WI2.0  Mobile Development, Digital Skills Academy
+* Student ID: 
+* Date : 2015/09/13
+* Ref:   various threads on stackoverflow prooved helpful but i didnt use anything specific. http://yeoman.io/codelab/write-app.html for deleting items and general design of app. https://www.youtube.com/watch?v=WuiHuZq_cg4&feature=player_embedded    also was usefull for learning the basics and the feature of a 'done' to do.  https://angularjs.org/ for documentation and how directives work. http://blog.jaykanakiya.com/angular-js-todo-list-sortable/ has info on local storage which i didnt get to use.
+
+-->
+<html ng-app="todolist">
+<head>
+	<script src="js/angular.min.js"></script>                       <!--linking to Angular-->
+	<script src="todolist.js"></script>                         <!--linking to js-->
+	<link rel="stylesheet" href="css/bootstrap.min.css">       <!--linking to bootstrap css-->
+	<link rel="stylesheet" href="todolist.css">                <!--linking to my css-->
+</head>
+<body>
+
+	<header>
+		<div class="container-fluid">
+			<h1>To Do List</h1>
+		</div>
+	</header>
+	<div class="container"  ng-controller="TodoListController" > 	<!--establishing a container div and attaching the controller-->
+
+		<div class="form-group">
+			<form class="well form-inline" role="form">    <!--form to enter to dos-->
+				<label class="label-inverse">To Do &nbsp;</label><input type="text" name="name" ng-model="newToDo.name" class="form-control" placeholder="Enter items here"/>
+
+				<label class="label-inverse">Priority&nbsp;</label> <!--form to enter priority level-->
+
+				<select ng-model="priority" ng-options="priority for priority in priorities" class="form-control"></select>
+
+				<button class="btn btn-primary" ng-click="newToDofunc()">Add To Do</button> <!--button to call the function which adds to dos and priorities-->
+
+			</form>
+		</div>
+
+		
+
+		<div>
+			<ul class="list-unstyled list-group">  <!--list to display to dos.-->
+				 <!--attaching css classes if priority levels are true-->
+
+				<li class="list-group-item" ng-repeat="newToDo in newToDos" ng-class="{ 'priority-high' : newToDo.priority == 'High', 'priority-medium' : newToDo.priority == 'Medium', 'done-true' : newToDo.done }">
+
+
+					<input type="checkbox" name="input" ng-model="newToDo.done"> <!--checkbox for if they are completed-->
+					<span class="done {{newToDo.done}}">{{newToDo.name}}</span>
+
+                    <!--priority level and button to delete from the list-->
+					<i class="icon-comment"><span class="priority {{newToDo.priority}} pull-right">{{newToDo.priority}} priority&nbsp;<button class="btn btn-danger input-btn" ng-click="removenewToDo($index)" aria-label="Remove">Delete</button></span></i> 
+					
+                    
+                    
+
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</body>
+</html>
